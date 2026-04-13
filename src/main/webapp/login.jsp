@@ -13,6 +13,13 @@
 
         <h3 class="text-center mb-4">🏠 En tu casa o en la mía</h3>
 
+        <!-- Mensaje de éxito tras registro -->
+        <% if ("1".equals(request.getParameter("exito"))) { %>
+        <div class="alert alert-success">
+            ✅ Cuenta creada correctamente. Ya puedes iniciar sesión.
+        </div>
+        <% } %>
+
         <!-- Mensaje de error -->
         <% if (request.getAttribute("error") != null) { %>
         <div class="alert alert-danger">
