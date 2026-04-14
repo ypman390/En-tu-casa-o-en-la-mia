@@ -183,6 +183,73 @@
         </div>
     </div>
 
+    <!-- ── GESTIÓN DE SOLICITUDES ────────────────────────── -->
+    <div class="card shadow mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">📋 Solicitudes recibidas</h5>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Usuario ID</th>
+                    <th>Espacio ID</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
+                    <th>Personas</th>
+                    <th>Precio total</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:choose>
+                    <c:when test="${empty solicitudes}">
+                        <tr>
+                            <td colspan="9" class="text-center text-muted py-3">
+                                No hay solicitudes todavía.
+                            </td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="s" items="${solicitudes}">
+                            <tr>
+                                <td>${s.id}</td>
+                                <td>${s.usuarioId}</td>
+                                <td>${s.espacioId}</td>
+                                <td>${s.fechaInicio}</td>
+                                <td>${s.fechaFin}</td>
+                                <td>${s.numeroPersonas}</td>
+                                <td>${s.precioTotal} €</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${s.aceptada}">
+                                            <span class="badge bg-success">Aceptada</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="badge bg-warning text-dark">Pendiente</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td>
+                                    <c:if test="${!s.aceptada}">
+                                        <a href="${pageContext.request.contextPath}/admin/aceptarSolicitud?id=${s.id}"
+                                           class="btn btn-success btn-sm">Aceptar</a>
+                                    </c:if>
+                                    <a href="${pageContext.request.contextPath}/admin/eliminarSolicitud?id=${s.id}"
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('¿Eliminar solicitud?')">Eliminar</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <!-- ── GESTIÓN DE CATEGORÍAS ─────────────────────────── -->
     <div class="card shadow mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
