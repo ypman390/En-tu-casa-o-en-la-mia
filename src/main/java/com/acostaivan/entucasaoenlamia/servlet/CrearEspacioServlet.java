@@ -3,6 +3,7 @@ package com.acostaivan.entucasaoenlamia.servlet;
 import com.acostaivan.entucasaoenlamia.dao.CategoriaDAO;
 import com.acostaivan.entucasaoenlamia.dao.EspacioDAO;
 import com.acostaivan.entucasaoenlamia.model.Espacio;
+import com.acostaivan.entucasaoenlamia.model.Usuario;
 import com.acostaivan.entucasaoenlamia.util.SubidaImagenUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -74,6 +75,8 @@ public class CrearEspacioServlet extends HttpServlet {
         String rutaImagen = SubidaImagenUtil.guardar(imagenPart, rutaBase);
 
         // ── Construir Espacio ─────────────────────────────────
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
+
         Espacio espacio = new Espacio();
         espacio.setTitulo(titulo);
         espacio.setDescripcion(descripcion);
@@ -84,6 +87,7 @@ public class CrearEspacioServlet extends HttpServlet {
         espacio.setCapacidad(capacidadStr != null ? Integer.parseInt(capacidadStr) : 1);
         espacio.setValoracion(BigDecimal.ZERO);
         espacio.setCategoriaId(categoriaStr != null ? Integer.parseInt(categoriaStr) : 0);
+        espacio.setUsuarioId(usuario.getId()); //
 
         boolean ok = espacioDAO.insertar(espacio);
 
