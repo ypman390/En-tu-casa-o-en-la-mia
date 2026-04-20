@@ -10,10 +10,21 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏠 Admin Panel</span>
+    <span class="navbar-brand">🏠 En tu casa o en la mía</span>
     <div>
-        <a href="${pageContext.request.contextPath}/admin/dashboard" class="btn btn-outline-light btn-sm me-2">Dashboard</a>
-        <a href="${pageContext.request.contextPath}/logout" class="btn btn-danger btn-sm">Cerrar sesión</a>
+        <%-- Navbar dinámica según rol --%>
+        <c:choose>
+            <c:when test="${sessionScope.rol == 'ADMIN'}">
+                <a href="${pageContext.request.contextPath}/admin/dashboard"
+                   class="btn btn-outline-light btn-sm me-2">Dashboard</a>
+            </c:when>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/usuario/misEspacios"
+                   class="btn btn-outline-light btn-sm me-2">Mis espacios</a>
+            </c:otherwise>
+        </c:choose>
+        <a href="${pageContext.request.contextPath}/logout"
+           class="btn btn-danger btn-sm">Cerrar sesión</a>
     </div>
 </nav>
 
@@ -72,8 +83,16 @@
 
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-success">Guardar espacio</button>
-                <a href="${pageContext.request.contextPath}/admin/dashboard"
-                   class="btn btn-secondary">Cancelar</a>
+                <c:choose>
+                    <c:when test="${sessionScope.rol == 'ADMIN'}">
+                        <a href="${pageContext.request.contextPath}/admin/dashboard"
+                           class="btn btn-secondary">Cancelar</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/usuario/misEspacios"
+                           class="btn btn-secondary">Cancelar</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
         </form>

@@ -12,10 +12,18 @@
 <nav class="navbar navbar-dark bg-dark px-4">
     <span class="navbar-brand">🏠 En tu casa o en la mía</span>
     <div>
-        <c:if test="${session.rol == 'ADMIN'}">
-            <a href="${pageContext.request.contextPath}/admin/dashboard"
-               class="btn btn-outline-warning btn-sm me-2">Admin Panel</a>
-        </c:if>
+        <c:choose>
+            <c:when test="${sessionScope.rol == 'ADMIN'}">
+                <a href="${pageContext.request.contextPath}/admin/dashboard"
+                   class="btn btn-outline-warning btn-sm me-2">Admin Panel</a>
+            </c:when>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/usuario/misEspacios"
+                   class="btn btn-outline-light btn-sm me-2">Mis espacios</a>
+                <a href="${pageContext.request.contextPath}/usuario/misSolicitudes"
+                   class="btn btn-outline-light btn-sm me-2">Mis solicitudes</a>
+            </c:otherwise>
+        </c:choose>
         <a href="${pageContext.request.contextPath}/logout"
            class="btn btn-danger btn-sm">Cerrar sesión</a>
     </div>
