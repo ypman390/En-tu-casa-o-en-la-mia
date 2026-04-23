@@ -75,6 +75,36 @@ public class UsuarioDAO {
         return lista;
     }
 
+    // ─── BUSCAR CON FILTROS (nombre + rol) ───────────────────
+    public List<Usuario> buscar(String nombre, String rol) {
+        List<Usuario> lista = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder("SELECT * FROM usuario WHERE 1=1");
+
+        if (nombre != null && !nombre.isBlank()) sql.append(" AND nombre LIKE ?");
+        if (rol != null && !rol.isBlank())       sql.append(" AND rol = ?");
+        sql.append(" ORDER BY id");
+
+
+
+        try (Connection con = ConexionDB.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql.toString())) {
+
+            int i = 1;
+            if (nombre != null && !nombre.isBlank()) ps.setString(i++, "%" + nombre + "%");
+            if (rol != null && !rol.isBlank())       ps.setString(i++, rol);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) lista.add(mapear(rs));
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
     // ─── BUSCAR POR ID ────────────────────────────────────────
     public Usuario buscarPorId(int id) {
         String sql = "SELECT * FROM usuario WHERE id = ?";
