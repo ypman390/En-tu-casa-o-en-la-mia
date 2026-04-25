@@ -16,6 +16,8 @@
            class="btn btn-outline-light btn-sm me-2">Ver espacios</a>
         <a href="${pageContext.request.contextPath}/usuario/misEspacios"
            class="btn btn-outline-light btn-sm me-2">Mis espacios</a>
+        <a href="${pageContext.request.contextPath}/usuario/perfil"
+           class="btn btn-outline-light btn-sm me-2">Mi perfil</a>
         <a href="${pageContext.request.contextPath}/logout"
            class="btn btn-danger btn-sm">Cerrar sesión</a>
     </div>

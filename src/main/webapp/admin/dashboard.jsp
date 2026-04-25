@@ -15,6 +15,8 @@
         <span class="text-white me-3">👤 ${sessionScope.usuarioLogueado.nombre}</span>
         <a href="${pageContext.request.contextPath}/espacios"
            class="btn btn-outline-light btn-sm me-2">Ver espacios</a>
+        <a href="${pageContext.request.contextPath}/usuario/perfil"
+           class="btn btn-outline-light btn-sm me-2">Mi perfil</a>
         <a href="${pageContext.request.contextPath}/logout"
            class="btn btn-danger btn-sm">Cerrar sesión</a>
     </div>

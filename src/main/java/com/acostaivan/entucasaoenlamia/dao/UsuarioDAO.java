@@ -124,22 +124,23 @@ public class UsuarioDAO {
     // ─── ACTUALIZAR ───────────────────────────────────────────
     public boolean actualizar(Usuario u) {
         String sql = """
-                UPDATE usuario
-                SET nombre=?, username=?, email=?, dni=?, rol=?, activo=?, puntos=?, credito=?
-                WHERE id=?
-                """;
+            UPDATE usuario
+            SET nombre=?, username=?, email=?, password=?, dni=?, rol=?, activo=?, puntos=?, credito=?
+            WHERE id=?
+            """;
         try (Connection con = ConexionDB.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, u.getNombre());
             ps.setString(2, u.getUsername());
             ps.setString(3, u.getEmail());
-            ps.setString(4, u.getDni());
-            ps.setString(5, u.getRol());
-            ps.setBoolean(6, u.isActivo());
-            ps.setInt(7, u.getPuntos());
-            ps.setBigDecimal(8, u.getCredito());
-            ps.setInt(9, u.getId());
+            ps.setString(4, u.getPassword());  // ← NUEVO
+            ps.setString(5, u.getDni());
+            ps.setString(6, u.getRol());
+            ps.setBoolean(7, u.isActivo());
+            ps.setInt(8, u.getPuntos());
+            ps.setBigDecimal(9, u.getCredito());
+            ps.setInt(10, u.getId());
 
             return ps.executeUpdate() > 0;
 
