@@ -119,6 +119,12 @@
         </form>
     </div>
 </div>
-
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        if (!confirm('¿Estás seguro de que quieres guardar los cambios?')) {
+            e.preventDefault();
+        }
+    });
+</script>
 </body>
 </html>
