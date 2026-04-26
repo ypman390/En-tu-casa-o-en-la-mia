@@ -29,13 +29,42 @@ public class AdminDashboardServlet extends HttpServlet {
             return;
         }
 
-        // Cargar datos para el dashboard
-        req.setAttribute("usuarios",   usuarioDAO.listar());
-        req.setAttribute("espacios",   espacioDAO.listar());
-        req.setAttribute("categorias", categoriaDAO.listar());
+// ── Filtros usuarios ──────────────────────────────────
+        String nombreFiltro = req.getParameter("nombreUsuario");
+        String rolFiltro    = req.getParameter("rolUsuario");
+
+        if ((nombreFiltro != null && !nombreFiltro.isBlank()) ||
+                (rolFiltro != null && !rolFiltro.isBlank())) {
+            req.setAttribute("usuarios", usuarioDAO.buscar(nombreFiltro, rolFiltro));
+        } else {
+            req.setAttribute("usuarios", usuarioDAO.listar());
+        }
+
+        req.setAttribute("nombreFiltro", nombreFiltro);
+        req.setAttribute("rolFiltro", rolFiltro);
+
+// ── Filtros categorías ────────────────────────────────
+        String nombreCategoriaFiltro = req.getParameter("nombreCategoria");
+        String tarifaMaxStr          = req.getParameter("tarifaMax");
+        Double tarifaMax             = null;
+
+        if (tarifaMaxStr != null && !tarifaMaxStr.isBlank()) {
+            tarifaMax = Double.parseDouble(tarifaMaxStr);
+        }
+
+        if ((nombreCategoriaFiltro != null && !nombreCategoriaFiltro.isBlank()) || tarifaMax != null) {
+            req.setAttribute("categorias", categoriaDAO.buscar(nombreCategoriaFiltro, tarifaMax));
+        } else {
+            req.setAttribute("categorias", categoriaDAO.listar());
+        }
+
+        req.setAttribute("nombreCategoriaFiltro", nombreCategoriaFiltro);
+        req.setAttribute("tarifaMaxFiltro", tarifaMaxStr);
+
+// ── Solo espacios y solicitudes sin filtro ────────────
+        req.setAttribute("espacios",    espacioDAO.listar());
         req.setAttribute("solicitudes", solicitudDAO.listar());
 
-        // Mensaje de éxito opcional
         req.setAttribute("exito", req.getParameter("exito"));
 
         req.getRequestDispatcher("/admin/dashboard.jsp").forward(req, resp);

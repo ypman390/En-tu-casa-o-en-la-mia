@@ -1,0 +1,19 @@
+services:
+
+  db:
+    image: mariadb:11
+    container_name: entucasa_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234
+      MYSQL_DATABASE: en_tu_casa_db
+      MYSQL_USER: entucasa
+      MYSQL_PASSWORD: entucasa1234
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - entucasa_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  entucasa_data:
