@@ -15,6 +15,7 @@ public class Espacio {
     private int capacidad;
     private BigDecimal valoracion;
     private int categoriaId;
+    private int usuarioId;
 
     public Espacio() {}
 
@@ -48,4 +49,7 @@ public class Espacio {
 
     public int getCategoriaId() { return categoriaId; }
     public void setCategoriaId(int categoriaId) { this.categoriaId = categoriaId; }
+
+    public int getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(int usuarioId) { this.usuarioId = usuarioId; }
 }
