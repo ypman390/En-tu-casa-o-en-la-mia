@@ -9,15 +9,14 @@
 </head>
 <body class="bg-light">
 
-<!-- Navbar -->
 <nav class="navbar navbar-dark bg-dark px-4">
     <span class="navbar-brand fw-bold">🏠 Admin Panel</span>
     <div>
-        <span class="text-white me-3">
-            👤 ${sessionScope.usuarioLogueado.nombre}
-        </span>
+        <span class="text-white me-3">👤 ${sessionScope.usuarioLogueado.nombre}</span>
         <a href="${pageContext.request.contextPath}/espacios"
            class="btn btn-outline-light btn-sm me-2">Ver espacios</a>
+        <a href="${pageContext.request.contextPath}/usuario/perfil"
+           class="btn btn-outline-light btn-sm me-2">Mi perfil</a>
         <a href="${pageContext.request.contextPath}/logout"
            class="btn btn-danger btn-sm">Cerrar sesión</a>
     </div>
@@ -25,15 +24,15 @@
 
 <div class="container mt-4">
 
-    <!-- Mensaje éxito -->
+    <!-- Mensajes éxito -->
     <c:if test="${exito == 'espacio'}">
-        <div class="alert alert-success">✅ Espacio creado correctamente.</div>
+        <div class="alert alert-success">✅ Espacio guardado correctamente.</div>
     </c:if>
     <c:if test="${exito == 'usuario'}">
         <div class="alert alert-success">✅ Usuario actualizado correctamente.</div>
     </c:if>
     <c:if test="${exito == 'categoria'}">
-        <div class="alert alert-success">✅ Categoría creada correctamente.</div>
+        <div class="alert alert-success">✅ Categoría guardada correctamente.</div>
     </c:if>
 
     <h2 class="mb-4">📊 Panel de administración</h2>
@@ -77,12 +76,8 @@
             <table class="table table-hover mb-0">
                 <thead class="table-dark">
                 <tr>
-                    <th>#</th>
-                    <th>Título</th>
-                    <th>Precio</th>
-                    <th>Disponible</th>
-                    <th>Capacidad</th>
-                    <th>Acciones</th>
+                    <th>#</th><th>Título</th><th>Precio</th>
+                    <th>Disponible</th><th>Capacidad</th><th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -101,20 +96,15 @@
                                 <td>${e.titulo}</td>
                                 <td>${e.precio} €</td>
                                 <td>
-                                    <c:choose>
-                                        <c:when test="${e.disponible}">
-                                            <span class="badge bg-success">Sí</span>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <span class="badge bg-danger">No</span>
-                                        </c:otherwise>
-                                    </c:choose>
+                                        <span class="badge ${e.disponible ? 'bg-success' : 'bg-danger'}">
+                                                ${e.disponible ? 'Sí' : 'No'}
+                                        </span>
                                 </td>
                                 <td>${e.capacidad}</td>
                                 <td>
                                     <a href="${pageContext.request.contextPath}/espacios/detalle?id=${e.id}"
                                        class="btn btn-info btn-sm">Ver</a>
-                                    <a href="${pageContext.request.contextPath}/admin/editarEspacio?id=${e.id}"
+                                    <a href="${pageContext.request.contextPath}/editarEspacio?id=${e.id}"
                                        class="btn btn-warning btn-sm">Editar</a>
                                     <a href="${pageContext.request.contextPath}/admin/eliminarEspacio?id=${e.id}"
                                        class="btn btn-danger btn-sm"
@@ -134,17 +124,42 @@
         <div class="card-header">
             <h5 class="mb-0">👤 Gestión de Usuarios</h5>
         </div>
+        <div class="card-body border-bottom">
+            <form action="${pageContext.request.contextPath}/admin/dashboard"
+                  method="get" class="row g-2 align-items-end">
+
+                <%-- Hidden para mantener filtros de categorías --%>
+                <input type="hidden" name="nombreCategoria" value="${nombreCategoriaFiltro}">
+                <input type="hidden" name="tarifaMax" value="${tarifaMaxFiltro}">
+
+                <div class="col-md-4">
+                    <label class="form-label">Buscar por nombre</label>
+                    <input type="text" name="nombreUsuario" class="form-control"
+                           value="${nombreFiltro}" placeholder="Ej: Ivan">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Rol</label>
+                    <select name="rolUsuario" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="USER"  ${rolFiltro == 'USER'  ? 'selected' : ''}>USER</option>
+                        <option value="ADMIN" ${rolFiltro == 'ADMIN' ? 'selected' : ''}>ADMIN</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+                </div>
+                <div class="col-md-2">
+                    <a href="${pageContext.request.contextPath}/admin/dashboard"
+                       class="btn btn-outline-secondary w-100">Limpiar</a>
+                </div>
+            </form>
+        </div>
         <div class="card-body p-0">
             <table class="table table-hover mb-0">
                 <thead class="table-dark">
                 <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Rol</th>
-                    <th>Activo</th>
-                    <th>Acciones</th>
+                    <th>#</th><th>Nombre</th><th>Username</th>
+                    <th>Email</th><th>Rol</th><th>Activo</th><th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -160,16 +175,13 @@
                                 </span>
                         </td>
                         <td>
-                            <c:choose>
-                                <c:when test="${u.activo}">
-                                    <span class="badge bg-success">Activo</span>
-                                </c:when>
-                                <c:otherwise>
-                                    <span class="badge bg-secondary">Inactivo</span>
-                                </c:otherwise>
-                            </c:choose>
+                                <span class="badge ${u.activo ? 'bg-success' : 'bg-secondary'}">
+                                        ${u.activo ? 'Activo' : 'Inactivo'}
+                                </span>
                         </td>
                         <td>
+                            <a href="${pageContext.request.contextPath}/admin/detalleUsuario?id=${u.id}"
+                               class="btn btn-info btn-sm">Ver</a>
                             <a href="${pageContext.request.contextPath}/admin/editarUsuario?id=${u.id}"
                                class="btn btn-warning btn-sm">Editar</a>
                             <a href="${pageContext.request.contextPath}/admin/desactivarUsuario?id=${u.id}"
@@ -184,23 +196,17 @@
     </div>
 
     <!-- ── GESTIÓN DE SOLICITUDES ────────────────────────── -->
-    <div class="card shadow mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card shadow mb-5">
+        <div class="card-header">
             <h5 class="mb-0">📋 Solicitudes recibidas</h5>
         </div>
         <div class="card-body p-0">
             <table class="table table-hover mb-0">
                 <thead class="table-dark">
                 <tr>
-                    <th>#</th>
-                    <th>Usuario ID</th>
-                    <th>Espacio ID</th>
-                    <th>Fecha inicio</th>
-                    <th>Fecha fin</th>
-                    <th>Personas</th>
-                    <th>Precio total</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th>#</th><th>Usuario ID</th><th>Espacio ID</th>
+                    <th>Fecha inicio</th><th>Fecha fin</th><th>Personas</th>
+                    <th>Precio total</th><th>Estado</th><th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -223,14 +229,9 @@
                                 <td>${s.numeroPersonas}</td>
                                 <td>${s.precioTotal} €</td>
                                 <td>
-                                    <c:choose>
-                                        <c:when test="${s.aceptada}">
-                                            <span class="badge bg-success">Aceptada</span>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <span class="badge bg-warning text-dark">Pendiente</span>
-                                        </c:otherwise>
-                                    </c:choose>
+                                        <span class="badge ${s.aceptada ? 'bg-success' : 'bg-warning text-dark'}">
+                                                ${s.aceptada ? 'Aceptada' : 'Pendiente'}
+                                        </span>
                                 </td>
                                 <td>
                                     <c:if test="${!s.aceptada}">
@@ -257,15 +258,40 @@
             <a href="${pageContext.request.contextPath}/admin/crearCategoria"
                class="btn btn-success btn-sm">➕ Nueva categoría</a>
         </div>
+        <div class="card-body border-bottom">
+            <form action="${pageContext.request.contextPath}/admin/dashboard"
+                  method="get" class="row g-2 align-items-end">
+
+                <%-- Hidden para mantener filtros de usuarios --%>
+                <input type="hidden" name="nombreUsuario" value="${nombreFiltro}">
+                <input type="hidden" name="rolUsuario" value="${rolFiltro}">
+
+                <div class="col-md-4">
+                    <label class="form-label">Buscar por nombre</label>
+                    <input type="text" name="nombreCategoria" class="form-control"
+                           value="${nombreCategoriaFiltro}" placeholder="Ej: Sofá">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Tarifa máxima (€)</label>
+                    <input type="number" name="tarifaMax" class="form-control"
+                           value="${tarifaMaxFiltro}" min="0" step="0.01"
+                           placeholder="Ej: 10.00">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+                </div>
+                <div class="col-md-2">
+                    <a href="${pageContext.request.contextPath}/admin/dashboard"
+                       class="btn btn-outline-secondary w-100">Limpiar</a>
+                </div>
+            </form>
+        </div>
         <div class="card-body p-0">
             <table class="table table-hover mb-0">
                 <thead class="table-dark">
                 <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Tarifa base</th>
-                    <th>Acciones</th>
+                    <th>#</th><th>Nombre</th><th>Descripción</th>
+                    <th>Tarifa base</th><th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -276,6 +302,10 @@
                         <td>${c.descripcion}</td>
                         <td>${c.tarifaBase} €</td>
                         <td>
+                            <a href="${pageContext.request.contextPath}/admin/detalleCategoria?id=${c.id}"
+                               class="btn btn-info btn-sm">Ver</a>
+                            <a href="${pageContext.request.contextPath}/admin/editarCategoria?id=${c.id}"
+                               class="btn btn-warning btn-sm">Editar</a>
                             <a href="${pageContext.request.contextPath}/admin/eliminarCategoria?id=${c.id}"
                                class="btn btn-danger btn-sm"
                                onclick="return confirm('¿Eliminar esta categoría?')">Eliminar</a>
@@ -288,6 +318,5 @@
     </div>
 
 </div>
-
 </body>
 </html>

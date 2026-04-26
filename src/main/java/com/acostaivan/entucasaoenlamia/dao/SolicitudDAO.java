@@ -118,6 +118,29 @@ public class SolicitudDAO {
         return false;
     }
 
+    // ─── LISTAR SOLICITUDES RECIBIDAS EN ESPACIOS DEL USUARIO ────
+    public List<Solicitud> listarPorEspaciosDeUsuario(int usuarioId) {
+        List<Solicitud> lista = new ArrayList<>();
+        String sql = """
+            SELECT s.* FROM solicitud s
+            INNER JOIN espacio e ON s.espacio_id = e.id
+            WHERE e.usuario_id = ?
+            ORDER BY s.id DESC
+            """;
+
+        try (Connection con = ConexionDB.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, usuarioId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) lista.add(mapear(rs));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
     // ─── MAPEAR ResultSet → Solicitud ─────────────────────────
     private Solicitud mapear(ResultSet rs) throws SQLException {
         Solicitud s = new Solicitud();

@@ -90,11 +90,11 @@ public class EspacioDAO {
     // ─── INSERTAR ─────────────────────────────────────────────
     public boolean insertar(Espacio e) {
         String sql = """
-                INSERT INTO espacio
-                (titulo, descripcion, precio, fecha_publicacion,
-                 disponible, imagen, capacidad, valoracion, categoria_id)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """;
+            INSERT INTO espacio
+            (titulo, descripcion, precio, fecha_publicacion,
+             disponible, imagen, capacidad, valoracion, categoria_id, usuario_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """;
         try (Connection con = ConexionDB.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -107,6 +107,7 @@ public class EspacioDAO {
             ps.setInt(7, e.getCapacidad());
             ps.setBigDecimal(8, e.getValoracion());
             ps.setInt(9, e.getCategoriaId());
+            ps.setInt(10, e.getUsuarioId());
 
             return ps.executeUpdate() > 0;
 
@@ -114,6 +115,23 @@ public class EspacioDAO {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public List<Espacio> listarPorUsuario(int usuarioId) {
+        List<Espacio> lista = new ArrayList<>();
+        String sql = "SELECT * FROM espacio WHERE usuario_id = ? ORDER BY fecha_publicacion DESC";
+
+        try (Connection con = ConexionDB.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, usuarioId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) lista.add(mapear(rs));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 
     // ─── ACTUALIZAR ───────────────────────────────────────────
@@ -173,6 +191,7 @@ public class EspacioDAO {
         e.setCapacidad(rs.getInt("capacidad"));
         e.setValoracion(rs.getBigDecimal("valoracion"));
         e.setCategoriaId(rs.getInt("categoria_id"));
+        e.setUsuarioId(rs.getInt("usuario_id"));
         return e;
     }
 }
