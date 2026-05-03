@@ -11,12 +11,12 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 420px;">
 
-        <h3 class="text-center mb-4">🏠 En tu casa o en la mía</h3>
+        <h3 class="text-center mb-4"> En tu casa o en la mía</h3>
 
         <!-- Mensaje de éxito tras registro -->
         <% if ("1".equals(request.getParameter("exito"))) { %>
         <div class="alert alert-success">
-            ✅ Cuenta creada correctamente. Ya puedes iniciar sesión.
+             Cuenta creada correctamente. Ya puedes iniciar sesión.
         </div>
         <% } %>
 

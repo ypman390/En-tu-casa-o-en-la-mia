@@ -10,9 +10,9 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand fw-bold">🏠 Admin Panel</span>
+    <span class="navbar-brand fw-bold"> Admin Panel</span>
     <div>
-        <span class="text-white me-3">👤 ${sessionScope.usuarioLogueado.nombre}</span>
+        <span class="text-white me-3"> ${sessionScope.usuarioLogueado.nombre}</span>
         <a href="${pageContext.request.contextPath}/espacios"
            class="btn btn-outline-light btn-sm me-2">Ver espacios</a>
         <a href="${pageContext.request.contextPath}/usuario/perfil"
@@ -26,16 +26,16 @@
 
     <!-- Mensajes éxito -->
     <c:if test="${exito == 'espacio'}">
-        <div class="alert alert-success">✅ Espacio guardado correctamente.</div>
+        <div class="alert alert-success"> Espacio guardado correctamente.</div>
     </c:if>
     <c:if test="${exito == 'usuario'}">
-        <div class="alert alert-success">✅ Usuario actualizado correctamente.</div>
+        <div class="alert alert-success"> Usuario actualizado correctamente.</div>
     </c:if>
     <c:if test="${exito == 'categoria'}">
-        <div class="alert alert-success">✅ Categoría guardada correctamente.</div>
+        <div class="alert alert-success"> Categoría guardada correctamente.</div>
     </c:if>
 
-    <h2 class="mb-4">📊 Panel de administración</h2>
+    <h2 class="mb-4"> Panel de administración</h2>
 
     <!-- Tarjetas resumen -->
     <div class="row g-3 mb-5">
@@ -43,7 +43,7 @@
             <div class="card text-white bg-primary shadow">
                 <div class="card-body text-center">
                     <h1>${usuarios.size()}</h1>
-                    <p class="mb-0">👤 Usuarios registrados</p>
+                    <p class="mb-0"> Usuarios registrados</p>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="card text-white bg-success shadow">
                 <div class="card-body text-center">
                     <h1>${espacios.size()}</h1>
-                    <p class="mb-0">🏠 Espacios publicados</p>
+                    <p class="mb-0"> Espacios publicados</p>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
             <div class="card text-white bg-warning shadow">
                 <div class="card-body text-center">
                     <h1>${categorias.size()}</h1>
-                    <p class="mb-0">📂 Categorías activas</p>
+                    <p class="mb-0"> Categorías activas</p>
                 </div>
             </div>
         </div>
@@ -68,9 +68,9 @@
     <!-- ── GESTIÓN DE ESPACIOS ────────────────────────────── -->
     <div class="card shadow mb-5">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">🏠 Gestión de Espacios</h5>
+            <h5 class="mb-0"> Gestión de Espacios</h5>
             <a href="${pageContext.request.contextPath}/admin/crearEspacio"
-               class="btn btn-success btn-sm">➕ Nuevo espacio</a>
+               class="btn btn-success btn-sm"> Nuevo espacio</a>
         </div>
         <div class="card-body p-0">
             <table class="table table-hover mb-0">
@@ -122,7 +122,7 @@
     <!-- ── GESTIÓN DE USUARIOS ───────────────────────────── -->
     <div class="card shadow mb-5">
         <div class="card-header">
-            <h5 class="mb-0">👤 Gestión de Usuarios</h5>
+            <h5 class="mb-0"> Gestión de Usuarios</h5>
         </div>
         <div class="card-body border-bottom">
             <form action="${pageContext.request.contextPath}/admin/dashboard"
@@ -198,7 +198,7 @@
     <!-- ── GESTIÓN DE SOLICITUDES ────────────────────────── -->
     <div class="card shadow mb-5">
         <div class="card-header">
-            <h5 class="mb-0">📋 Solicitudes recibidas</h5>
+            <h5 class="mb-0"> Solicitudes recibidas</h5>
         </div>
         <div class="card-body p-0">
             <table class="table table-hover mb-0">
@@ -254,9 +254,9 @@
     <!-- ── GESTIÓN DE CATEGORÍAS ─────────────────────────── -->
     <div class="card shadow mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">📂 Gestión de Categorías</h5>
+            <h5 class="mb-0"> Gestión de Categorías</h5>
             <a href="${pageContext.request.contextPath}/admin/crearCategoria"
-               class="btn btn-success btn-sm">➕ Nueva categoría</a>
+               class="btn btn-success btn-sm"> Nueva categoría</a>
         </div>
         <div class="card-body border-bottom">
             <form action="${pageContext.request.contextPath}/admin/dashboard"

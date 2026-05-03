@@ -10,7 +10,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏠 En tu casa o en la mía</span>
+    <span class="navbar-brand"> En tu casa o en la mía</span>
     <div>
         <c:choose>
             <c:when test="${sessionScope.rol == 'ADMIN'}">
@@ -32,7 +32,7 @@
 </nav>
 
 <div class="container mt-4">
-    <h2 class="mb-3">🔍 Espacios disponibles</h2>
+    <h2 class="mb-3"> Espacios disponibles</h2>
 
     <!-- Filtros -->
     <div class="card p-3 mb-4 shadow-sm">
@@ -96,8 +96,8 @@
                                 <h5 class="card-title">${e.titulo}</h5>
                                 <p class="card-text text-muted small">${e.descripcion}</p>
                                 <p class="fw-bold text-success">${e.precio} €/noche</p>
-                                <p class="small">👥 Capacidad: ${e.capacidad} persona(s)</p>
-                                <p class="small">⭐ Valoración: ${e.valoracion}</p>
+                                <p class="small"> Capacidad: ${e.capacidad} persona(s)</p>
+                                <p class="small"> Valoración: ${e.valoracion}</p>
                             </div>
 
                             <div class="card-footer">

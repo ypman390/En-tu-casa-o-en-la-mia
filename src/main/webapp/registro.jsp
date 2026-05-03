@@ -11,7 +11,7 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 480px;">
 
-        <h3 class="text-center mb-4">🏠 Crear cuenta</h3>
+        <h3 class="text-center mb-4"> Crear cuenta</h3>
 
         <!-- Mensaje de error -->
         <% if (request.getAttribute("error") != null) { %>

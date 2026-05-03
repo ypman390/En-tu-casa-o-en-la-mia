@@ -10,7 +10,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏠 En tu casa o en la mía</span>
+    <span class="navbar-brand"> En tu casa o en la mía</span>
     <div>
         <a href="${pageContext.request.contextPath}/espacios"
            class="btn btn-outline-light btn-sm me-2">← Volver</a>
@@ -27,7 +27,7 @@
 
     <!-- Mensaje éxito -->
     <c:if test="${param.exito == 'solicitud'}">
-        <div class="alert alert-success">✅ Solicitud enviada correctamente.</div>
+        <div class="alert alert-success">Solicitud enviada correctamente.</div>
     </c:if>
 
     <div class="card shadow">
@@ -66,15 +66,15 @@
                     <small class="text-muted">por noche</small>
                 </div>
                 <div class="col-md-3 text-center">
-                    <h4>👥 ${espacio.capacidad}</h4>
+                    <h4> ${espacio.capacidad}</h4>
                     <small class="text-muted">personas</small>
                 </div>
                 <div class="col-md-3 text-center">
-                    <h4>⭐ ${espacio.valoracion}</h4>
+                    <h4> ${espacio.valoracion}</h4>
                     <small class="text-muted">valoración</small>
                 </div>
                 <div class="col-md-3 text-center">
-                    <h4>📂 ${categoria.nombre}</h4>
+                    <h4> ${categoria.nombre}</h4>
                     <small class="text-muted">categoría</small>
                 </div>
             </div>
@@ -86,19 +86,19 @@
                 <c:when test="${sessionScope.rol == 'ADMIN'}">
                     <div class="d-flex gap-2">
                         <a href="${pageContext.request.contextPath}/editarEspacio?id=${espacio.id}"
-                           class="btn btn-warning">✏️ Editar</a>
+                           class="btn btn-warning"> Editar</a>
                         <a href="${pageContext.request.contextPath}/admin/eliminarEspacio?id=${espacio.id}"
                            class="btn btn-danger"
                            onclick="return confirm('¿Estás seguro de que quieres eliminar este espacio?')">
-                            🗑️ Eliminar</a>
+                             Eliminar</a>
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <%-- ✅ Solo muestra el formulario si NO es el dueño del espacio --%>
+                    <%--  Solo muestra el formulario si NO es el dueño del espacio --%>
                     <c:choose>
                         <c:when test="${espacio.usuarioId == sessionScope.usuarioLogueado.id}">
                             <div class="alert alert-info mt-3">
-                                🏠 Este es tu espacio. Puedes
+                                 Este es tu espacio. Puedes
                                 <a href="${pageContext.request.contextPath}/editarEspacio?id=${espacio.id}">editarlo</a>
                                 o
                                 <a href="${pageContext.request.contextPath}/admin/eliminarEspacio?id=${espacio.id}"
@@ -107,7 +107,7 @@
                         </c:when>
                         <c:otherwise>
                             <c:if test="${espacio.disponible}">
-                                <h5 class="mt-3">📋 Solicitar este espacio</h5>
+                                <h5 class="mt-3"> Solicitar este espacio</h5>
                                 <form action="${pageContext.request.contextPath}/solicitudes/crear"
                                       method="post">
                                     <input type="hidden" name="espacioId" value="${espacio.id}">

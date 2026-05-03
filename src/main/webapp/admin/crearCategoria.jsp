@@ -20,7 +20,7 @@
 </nav>
 
 <div class="container mt-4" style="max-width: 600px;">
-    <h2 class="mb-4">➕ Nueva categoría</h2>
+    <h2 class="mb-4"> Nueva categoría</h2>
 
     <c:if test="${not empty error}">
         <div class="alert alert-danger">${error}</div>

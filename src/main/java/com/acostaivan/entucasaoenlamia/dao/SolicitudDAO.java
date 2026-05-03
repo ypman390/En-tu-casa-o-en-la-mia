@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SolicitudDAO {
 
-    // ─── INSERTAR ─────────────────────────────────────────────
+
     public boolean insertar(Solicitud s) {
         String sql = """
                 INSERT INTO solicitud
@@ -37,7 +37,7 @@ public class SolicitudDAO {
         return false;
     }
 
-    // ─── LISTAR TODAS (admin) ─────────────────────────────────
+
     public List<Solicitud> listar() {
         List<Solicitud> lista = new ArrayList<>();
         String sql = "SELECT * FROM solicitud ORDER BY id DESC";
@@ -54,7 +54,7 @@ public class SolicitudDAO {
         return lista;
     }
 
-    // ─── LISTAR POR USUARIO ───────────────────────────────────
+
     public List<Solicitud> listarPorUsuario(int usuarioId) {
         List<Solicitud> lista = new ArrayList<>();
         String sql = "SELECT * FROM solicitud WHERE usuario_id = ? ORDER BY id DESC";
@@ -72,7 +72,7 @@ public class SolicitudDAO {
         return lista;
     }
 
-    // ─── BUSCAR POR ID ────────────────────────────────────────
+
     public Solicitud buscarPorId(int id) {
         String sql = "SELECT * FROM solicitud WHERE id = ?";
         try (Connection con = ConexionDB.getConexion();
@@ -88,7 +88,7 @@ public class SolicitudDAO {
         return null;
     }
 
-    // ─── ACEPTAR solicitud ────────────────────────────────────
+
     public boolean aceptar(int id) {
         String sql = "UPDATE solicitud SET aceptada = true WHERE id = ?";
         try (Connection con = ConexionDB.getConexion();
@@ -103,7 +103,7 @@ public class SolicitudDAO {
         return false;
     }
 
-    // ─── ELIMINAR ─────────────────────────────────────────────
+
     public boolean eliminar(int id) {
         String sql = "DELETE FROM solicitud WHERE id = ?";
         try (Connection con = ConexionDB.getConexion();
@@ -118,7 +118,7 @@ public class SolicitudDAO {
         return false;
     }
 
-    // ─── LISTAR SOLICITUDES RECIBIDAS EN ESPACIOS DEL USUARIO ────
+
     public List<Solicitud> listarPorEspaciosDeUsuario(int usuarioId) {
         List<Solicitud> lista = new ArrayList<>();
         String sql = """
@@ -141,7 +141,7 @@ public class SolicitudDAO {
         return lista;
     }
 
-    // ─── MAPEAR ResultSet → Solicitud ─────────────────────────
+
     private Solicitud mapear(ResultSet rs) throws SQLException {
         Solicitud s = new Solicitud();
         s.setId(rs.getInt("id"));

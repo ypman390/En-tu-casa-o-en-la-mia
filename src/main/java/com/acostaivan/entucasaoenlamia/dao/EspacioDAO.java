@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EspacioDAO {
 
-    // ─── LISTAR TODOS ─────────────────────────────────────────
+
     public List<Espacio> listar() {
         List<Espacio> lista = new ArrayList<>();
         String sql = "SELECT * FROM espacio ORDER BY fecha_publicacion DESC";
@@ -26,7 +26,7 @@ public class EspacioDAO {
         return lista;
     }
 
-    // ─── LISTAR SOLO DISPONIBLES ──────────────────────────────
+
     public List<Espacio> listarDisponibles() {
         List<Espacio> lista = new ArrayList<>();
         String sql = "SELECT * FROM espacio WHERE disponible = true ORDER BY fecha_publicacion DESC";
@@ -43,7 +43,7 @@ public class EspacioDAO {
         return lista;
     }
 
-    // ─── BUSCAR CON FILTROS (precio + categoría) ──────────────
+
     public List<Espacio> buscar(Double precioMax, Integer categoriaId) {
         List<Espacio> lista = new ArrayList<>();
 
@@ -71,7 +71,7 @@ public class EspacioDAO {
         return lista;
     }
 
-    // ─── BUSCAR POR ID ────────────────────────────────────────
+
     public Espacio buscarPorId(int id) {
         String sql = "SELECT * FROM espacio WHERE id = ?";
         try (Connection con = ConexionDB.getConexion();
@@ -87,7 +87,7 @@ public class EspacioDAO {
         return null;
     }
 
-    // ─── INSERTAR ─────────────────────────────────────────────
+
     public boolean insertar(Espacio e) {
         String sql = """
             INSERT INTO espacio
@@ -134,7 +134,7 @@ public class EspacioDAO {
         return lista;
     }
 
-    // ─── ACTUALIZAR ───────────────────────────────────────────
+
     public boolean actualizar(Espacio e) {
         String sql = """
                 UPDATE espacio
@@ -163,7 +163,7 @@ public class EspacioDAO {
         return false;
     }
 
-    // ─── ELIMINAR ─────────────────────────────────────────────
+
     public boolean eliminar(int id) {
         String sql = "DELETE FROM espacio WHERE id = ?";
         try (Connection con = ConexionDB.getConexion();
@@ -178,7 +178,7 @@ public class EspacioDAO {
         return false;
     }
 
-    // ─── MAPEAR ResultSet → Espacio ───────────────────────────
+
     private Espacio mapear(ResultSet rs) throws SQLException {
         Espacio e = new Espacio();
         e.setId(rs.getInt("id"));

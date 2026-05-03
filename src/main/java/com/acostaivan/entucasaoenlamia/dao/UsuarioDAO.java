@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UsuarioDAO {
 
-    // ─── LOGIN ───────────────────────────────────────────────
+
     public Usuario login(String username, String password) {
         String sql = "SELECT * FROM usuario WHERE username = ? AND password = ? AND activo = true";
         try (Connection con = ConexionDB.getConexion();
@@ -28,7 +28,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    // ─── INSERTAR ─────────────────────────────────────────────
+
     public boolean insertar(Usuario u) {
         String sql = """
                 INSERT INTO usuario
@@ -57,7 +57,7 @@ public class UsuarioDAO {
         return false;
     }
 
-    // ─── LISTAR TODOS ─────────────────────────────────────────
+
     public List<Usuario> listar() {
         List<Usuario> lista = new ArrayList<>();
         String sql = "SELECT * FROM usuario ORDER BY id";
@@ -75,7 +75,7 @@ public class UsuarioDAO {
         return lista;
     }
 
-    // ─── BUSCAR CON FILTROS (nombre + rol) ───────────────────
+
     public List<Usuario> buscar(String nombre, String rol) {
         List<Usuario> lista = new ArrayList<>();
 
@@ -105,7 +105,7 @@ public class UsuarioDAO {
         return lista;
     }
 
-    // ─── BUSCAR POR ID ────────────────────────────────────────
+
     public Usuario buscarPorId(int id) {
         String sql = "SELECT * FROM usuario WHERE id = ?";
         try (Connection con = ConexionDB.getConexion();
@@ -121,7 +121,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    // ─── ACTUALIZAR ───────────────────────────────────────────
+
     public boolean actualizar(Usuario u) {
         String sql = """
             UPDATE usuario
@@ -150,7 +150,7 @@ public class UsuarioDAO {
         return false;
     }
 
-    // ─── ELIMINAR (baja lógica) ───────────────────────────────
+
     public boolean desactivar(int id) {
         String sql = "UPDATE usuario SET activo = false WHERE id = ?";
         try (Connection con = ConexionDB.getConexion();
@@ -165,7 +165,7 @@ public class UsuarioDAO {
         return false;
     }
 
-    // ─── MAPEAR ResultSet → Usuario ───────────────────────────
+
     private Usuario mapear(ResultSet rs) throws SQLException {
         Usuario u = new Usuario();
         u.setId(rs.getInt("id"));

@@ -29,7 +29,7 @@ public class AdminDashboardServlet extends HttpServlet {
             return;
         }
 
-// ── Filtros usuarios ──────────────────────────────────
+//  Filtros usuarios
         String nombreFiltro = req.getParameter("nombreUsuario");
         String rolFiltro    = req.getParameter("rolUsuario");
 
@@ -43,7 +43,7 @@ public class AdminDashboardServlet extends HttpServlet {
         req.setAttribute("nombreFiltro", nombreFiltro);
         req.setAttribute("rolFiltro", rolFiltro);
 
-// ── Filtros categorías ────────────────────────────────
+// Filtros categorías
         String nombreCategoriaFiltro = req.getParameter("nombreCategoria");
         String tarifaMaxStr          = req.getParameter("tarifaMax");
         Double tarifaMax             = null;
@@ -61,7 +61,7 @@ public class AdminDashboardServlet extends HttpServlet {
         req.setAttribute("nombreCategoriaFiltro", nombreCategoriaFiltro);
         req.setAttribute("tarifaMaxFiltro", tarifaMaxStr);
 
-// ── Solo espacios y solicitudes sin filtro ────────────
+
         req.setAttribute("espacios",    espacioDAO.listar());
         req.setAttribute("solicitudes", solicitudDAO.listar());
 

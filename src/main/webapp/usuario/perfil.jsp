@@ -10,7 +10,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏠 En tu casa o en la mía</span>
+    <span class="navbar-brand"> En tu casa o en la mía</span>
     <div>
         <c:choose>
             <c:when test="${sessionScope.rol == 'ADMIN'}">
@@ -30,14 +30,14 @@
 </nav>
 
 <div class="container mt-4" style="max-width: 600px;">
-    <h2 class="mb-4">👤 Mi perfil</h2>
+    <h2 class="mb-4"> Mi perfil</h2>
 
     <!-- Mensajes -->
     <c:if test="${not empty exito}">
-        <div class="alert alert-success">✅ ${exito}</div>
+        <div class="alert alert-success"> ${exito}</div>
     </c:if>
     <c:if test="${not empty error}">
-        <div class="alert alert-danger">❌ ${error}</div>
+        <div class="alert alert-danger"> ${error}</div>
     </c:if>
 
     <div class="card shadow p-4">
@@ -79,7 +79,7 @@
             </div>
 
             <hr>
-            <h6 class="mb-3">🔒 Cambiar contraseña</h6>
+            <h6 class="mb-3"> Cambiar contraseña</h6>
 
             <div class="mb-3">
                 <label class="form-label">Contraseña actual *</label>

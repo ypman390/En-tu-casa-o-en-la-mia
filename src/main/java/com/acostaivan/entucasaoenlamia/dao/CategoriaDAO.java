@@ -34,7 +34,7 @@ public class CategoriaDAO {
         return lista;
     }
 
-    // ─── BUSCAR CON FILTROS (nombre + tarifaMax) ──────────────
+
     public List<Categoria> buscar(String nombre, Double tarifaMax) {
         List<Categoria> lista = new ArrayList<>();
 

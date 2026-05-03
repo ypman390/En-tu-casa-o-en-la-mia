@@ -10,7 +10,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏠 Admin Panel</span>
+    <span class="navbar-brand"> Admin Panel</span>
     <div>
         <a href="${pageContext.request.contextPath}/admin/dashboard"
            class="btn btn-outline-light btn-sm me-2">← Volver</a>
@@ -20,7 +20,7 @@
 </nav>
 
 <div class="container mt-4" style="max-width: 600px;">
-    <h2 class="mb-4">📂 Detalle de categoría</h2>
+    <h2 class="mb-4"> Detalle de categoría</h2>
 
     <div class="card shadow p-4">
         <table class="table">
@@ -65,10 +65,10 @@
 
         <div class="d-flex gap-2 mt-2">
             <a href="${pageContext.request.contextPath}/admin/editarCategoria?id=${categoria.id}"
-               class="btn btn-warning">✏️ Editar</a>
+               class="btn btn-warning"> Editar</a>
             <a href="${pageContext.request.contextPath}/admin/eliminarCategoria?id=${categoria.id}"
                class="btn btn-danger"
-               onclick="return confirm('¿Eliminar esta categoría?')">🗑️ Eliminar</a>
+               onclick="return confirm('¿Eliminar esta categoría?')"> Eliminar</a>
         </div>
     </div>
 </div>

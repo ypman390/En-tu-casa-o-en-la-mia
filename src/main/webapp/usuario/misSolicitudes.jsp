@@ -10,7 +10,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏠 En tu casa o en la mía</span>
+    <span class="navbar-brand"> En tu casa o en la mía</span>
     <div>
         <a href="${pageContext.request.contextPath}/espacios"
            class="btn btn-outline-light btn-sm me-2">Ver espacios</a>
@@ -24,7 +24,7 @@
 </nav>
 
 <div class="container mt-4">
-    <h2 class="mb-4">📋 Mis solicitudes enviadas</h2>
+    <h2 class="mb-4"> Mis solicitudes enviadas</h2>
 
     <div class="card shadow">
         <div class="card-body p-0">

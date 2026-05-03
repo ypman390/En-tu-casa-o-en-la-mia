@@ -10,7 +10,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏠 En tu casa o en la mía</span>
+    <span class="navbar-brand"> En tu casa o en la mía</span>
     <div>
         <%-- Navbar dinámica según rol --%>
         <c:choose>
@@ -29,7 +29,7 @@
 </nav>
 
 <div class="container mt-4" style="max-width: 700px;">
-    <h2 class="mb-4">✏️ Editar espacio</h2>
+    <h2 class="mb-4"> Editar espacio</h2>
 
     <!-- Error -->
     <c:if test="${not empty error}">

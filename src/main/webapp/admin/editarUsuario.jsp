@@ -10,7 +10,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏠 Admin Panel</span>
+    <span class="navbar-brand"> Admin Panel</span>
     <div>
         <a href="${pageContext.request.contextPath}/admin/dashboard"
            class="btn btn-outline-light btn-sm me-2">Dashboard</a>
@@ -20,7 +20,7 @@
 </nav>
 
 <div class="container mt-4" style="max-width: 600px;">
-    <h2 class="mb-4">✏️ Editar usuario</h2>
+    <h2 class="mb-4"> Editar usuario</h2>
 
     <div class="card shadow p-4">
         <form action="${pageContext.request.contextPath}/admin/editarUsuario"

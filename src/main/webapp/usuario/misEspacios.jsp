@@ -10,7 +10,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏠 En tu casa o en la mía</span>
+    <span class="navbar-brand"> En tu casa o en la mía</span>
     <div>
         <a href="${pageContext.request.contextPath}/espacios"
            class="btn btn-outline-light btn-sm me-2">Ver espacios</a>
@@ -28,21 +28,21 @@
     <!-- Mensajes -->
     <c:choose>
         <c:when test="${exito == 'aceptada'}">
-            <div class="alert alert-success">✅ Solicitud aceptada correctamente.</div>
+            <div class="alert alert-success"> Solicitud aceptada correctamente.</div>
         </c:when>
         <c:when test="${exito == 'rechazada'}">
-            <div class="alert alert-warning">❌ Solicitud rechazada.</div>
+            <div class="alert alert-warning"> Solicitud rechazada.</div>
         </c:when>
         <c:when test="${exito == 'editado'}">
-            <div class="alert alert-success">✅ Espacio actualizado correctamente.</div>
+            <div class="alert alert-success"> Espacio actualizado correctamente.</div>
         </c:when>
     </c:choose>
 
     <!-- ── MIS ESPACIOS PUBLICADOS ───────────────────────── -->
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>🏠 Mis espacios publicados</h2>
+        <h2> Mis espacios publicados</h2>
         <a href="${pageContext.request.contextPath}/admin/crearEspacio"
-           class="btn btn-success">➕ Publicar nuevo espacio</a>
+           class="btn btn-success"> Publicar nuevo espacio</a>
     </div>
 
     <div class="card shadow mb-5">
@@ -103,7 +103,7 @@
     </div>
 
     <!-- ── SOLICITUDES RECIBIDAS ─────────────────────────── -->
-    <h2 class="mb-3">📋 Solicitudes recibidas en mis espacios</h2>
+    <h2 class="mb-3"> Solicitudes recibidas en mis espacios</h2>
 
     <div class="card shadow mb-4">
         <div class="card-body p-0">

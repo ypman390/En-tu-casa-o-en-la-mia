@@ -10,7 +10,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-dark bg-dark px-4">
-    <span class="navbar-brand">🏠 Admin Panel</span>
+    <span class="navbar-brand"> Admin Panel</span>
     <div>
         <a href="${pageContext.request.contextPath}/admin/dashboard"
            class="btn btn-outline-light btn-sm me-2">← Volver</a>
@@ -20,7 +20,7 @@
 </nav>
 
 <div class="container mt-4" style="max-width: 600px;">
-    <h2 class="mb-4">👤 Detalle del usuario</h2>
+    <h2 class="mb-4"> Detalle del usuario</h2>
 
     <div class="card shadow p-4">
         <table class="table">
@@ -81,10 +81,10 @@
 
         <div class="d-flex gap-2 mt-2">
             <a href="${pageContext.request.contextPath}/admin/editarUsuario?id=${usuario.id}"
-               class="btn btn-warning">✏️ Editar</a>
+               class="btn btn-warning"> Editar</a>
             <a href="${pageContext.request.contextPath}/admin/desactivarUsuario?id=${usuario.id}"
                class="btn btn-danger"
-               onclick="return confirm('¿Desactivar este usuario?')">🚫 Desactivar</a>
+               onclick="return confirm('¿Desactivar este usuario?')"> Desactivar</a>
         </div>
     </div>
 </div>
