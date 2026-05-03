@@ -85,51 +85,66 @@
             <c:choose>
                 <c:when test="${sessionScope.rol == 'ADMIN'}">
                     <div class="d-flex gap-2">
-                        <a href="${pageContext.request.contextPath}/admin/editarEspacio?id=${espacio.id}"
+                        <a href="${pageContext.request.contextPath}/editarEspacio?id=${espacio.id}"
                            class="btn btn-warning">✏️ Editar</a>
                         <a href="${pageContext.request.contextPath}/admin/eliminarEspacio?id=${espacio.id}"
                            class="btn btn-danger"
-                           onclick="return confirm('¿Eliminar este espacio?')">🗑️ Eliminar</a>
+                           onclick="return confirm('¿Estás seguro de que quieres eliminar este espacio?')">
+                            🗑️ Eliminar</a>
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <c:if test="${espacio.disponible}">
-                        <h5 class="mt-3">📋 Solicitar este espacio</h5>
-                        <form action="${pageContext.request.contextPath}/solicitudes/crear"
-                              method="post">
-                            <input type="hidden" name="espacioId" value="${espacio.id}">
-                            <input type="hidden" name="precio" value="${espacio.precio}">
-
-                            <div class="row g-2">
-                                <div class="col-md-4">
-                                    <label class="form-label">Fecha inicio</label>
-                                    <input type="date" name="fechaInicio"
-                                           class="form-control" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Fecha fin</label>
-                                    <input type="date" name="fechaFin"
-                                           class="form-control" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Nº personas</label>
-                                    <input type="number" name="numeroPersonas"
-                                           class="form-control" min="1"
-                                           max="${espacio.capacidad}" value="1">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Comentario (opcional)</label>
-                                    <textarea name="comentario" class="form-control"
-                                              rows="2"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">
-                                        Enviar solicitud
-                                    </button>
-                                </div>
+                    <%-- ✅ Solo muestra el formulario si NO es el dueño del espacio --%>
+                    <c:choose>
+                        <c:when test="${espacio.usuarioId == sessionScope.usuarioLogueado.id}">
+                            <div class="alert alert-info mt-3">
+                                🏠 Este es tu espacio. Puedes
+                                <a href="${pageContext.request.contextPath}/editarEspacio?id=${espacio.id}">editarlo</a>
+                                o
+                                <a href="${pageContext.request.contextPath}/admin/eliminarEspacio?id=${espacio.id}"
+                                   onclick="return confirm('¿Estás seguro de que quieres eliminar este espacio?')">eliminarlo</a>.
                             </div>
-                        </form>
-                    </c:if>
+                        </c:when>
+                        <c:otherwise>
+                            <c:if test="${espacio.disponible}">
+                                <h5 class="mt-3">📋 Solicitar este espacio</h5>
+                                <form action="${pageContext.request.contextPath}/solicitudes/crear"
+                                      method="post">
+                                    <input type="hidden" name="espacioId" value="${espacio.id}">
+                                    <input type="hidden" name="precio" value="${espacio.precio}">
+
+                                    <div class="row g-2">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Fecha inicio</label>
+                                            <input type="date" name="fechaInicio"
+                                                   class="form-control" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Fecha fin</label>
+                                            <input type="date" name="fechaFin"
+                                                   class="form-control" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Nº personas</label>
+                                            <input type="number" name="numeroPersonas"
+                                                   class="form-control" min="1"
+                                                   max="${espacio.capacidad}" value="1">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Comentario (opcional)</label>
+                                            <textarea name="comentario" class="form-control"
+                                                      rows="2"></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">
+                                                Enviar solicitud
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
                 </c:otherwise>
             </c:choose>
 
